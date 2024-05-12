@@ -7,9 +7,13 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: const MyApp(),
+    MultiProvider(providers: [
+      ChangeNotifierProvider(create: (context) => ThemeProvider(),
+      ),
+
+      ChangeNotifierProvider(create: (context) => ThemeProvider(),),
+    ],
+    child: const MyApp(),
     ),
   );
 }

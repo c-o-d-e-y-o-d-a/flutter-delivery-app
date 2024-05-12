@@ -1,3 +1,4 @@
+import 'package:delv/pages/home_page.dart';
 import 'package:delv/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:delv/components/my_drawer_tile.dart';
@@ -33,21 +34,26 @@ class MyDrawer extends StatelessWidget {
                 icon: Icons.home,
                 onTap: (){
                   Navigator.pop(context);
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=> const settingsPage(),));
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=> const HomePage(),));
                 }),
 
 
                 MyDrawerTile(
                 text: "S E T T I N G S",
                 icon: Icons.settings,
-                onTap: (){}),
+                onTap: (){
+                  Navigator.pop(context);
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=> const settingsPage(),));
+                }),
 
                 const Spacer(),//fills all space in bw
 
                 MyDrawerTile(
                 text: "L O G O U T",
                 icon: Icons.logout,
-                onTap: (){}),
+                onTap: (){
+                  
+                }),
 
                 const SizedBox(height: 25,),
           ]));

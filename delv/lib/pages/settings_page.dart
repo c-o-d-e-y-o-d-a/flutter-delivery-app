@@ -1,7 +1,7 @@
+import 'package:delv/themes/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:delv/provider/theme_provider.dart'; // Import your ThemeProvider
 
 class settingsPage extends StatelessWidget {
   const settingsPage({Key? key}) : super(key: key);
