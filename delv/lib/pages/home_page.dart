@@ -1,10 +1,12 @@
 import 'package:delv/components/my_current_location.dart';
 import 'package:delv/components/my_description_box.dart';
 import 'package:delv/components/my_drawer.dart';
+import 'package:delv/components/my_food_tile.dart';
 import 'package:delv/components/my_silver_app_bar.dart';
 import 'package:delv/components/my_tab_bar.dart';
 import 'package:delv/models/food.dart';
 import 'package:delv/models/restraunts.dart';
+import 'package:delv/pages/food_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -47,19 +49,29 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       return ListView.builder(
         itemCount: categoryMenu.length,
         physics: const NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.zero,
         itemBuilder: (context,index){
-          return ListTile(
-            title: Text(categoryMenu[index].name),
-          );
+          final food = categoryMenu[index];
+          return FoodTile(
+           food: food,
+           onTap: () => Navigator.push(context, 
+           MaterialPageRoute(
+            builder: (context) => FoodPage(food: food),
+            )));
 
         },
       );
     }).toList();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Stack(
+      children: [
+      Scaffold(
+      appBar:AppBar(),
      
       drawer: const MyDrawer(),
 
@@ -93,8 +105,33 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           builder: (context, restraunt, child) => TabBarView(
           controller: _tabController,
           children: getFoodInThisCategory(restraunt.menu),
-        ))
+        
+        )
+        )
       ),
+    ),
+
+    
+    SafeArea(
+      child:Opacity(opacity: 0.6,
+      child:Container(
+          decoration:BoxDecoration(
+            color:Theme.of(context).colorScheme.secondary,
+           shape: BoxShape.circle,
+          ),
+          child: IconButton(
+            icon:Icon(Icons.arrow_back_ios_rounded),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
+        ), ),
+        
+      ]
+    
     );
+
+
+    
+    
   }
 }

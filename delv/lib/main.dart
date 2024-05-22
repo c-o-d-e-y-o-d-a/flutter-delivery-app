@@ -1,7 +1,9 @@
 import 'package:delv/auth/login_or_register.dart';
+import 'package:delv/models/restraunts.dart';
 import 'package:flutter/material.dart';
 import 'package:delv/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
+
 
 
 
@@ -11,7 +13,8 @@ void main() {
       ChangeNotifierProvider(create: (context) => ThemeProvider(),
       ),
 
-      ChangeNotifierProvider(create: (context) => ThemeProvider(),),
+      ChangeNotifierProvider(create: (context) => Restraunt(),
+      ),
     ],
     child: const MyApp(),
     ),
