@@ -6,6 +6,11 @@ import 'package:intl/intl.dart';
 
 
 class Restraunt extends ChangeNotifier {
+
+  String _deliveryAddress = '99 Hollywood Blv';
+  String get deliveryAddress => _deliveryAddress;
+
+
   final List<Food> _menu = [
     // burgers
     Food(
@@ -115,6 +120,13 @@ class Restraunt extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateDeliveryAddress(String newAddress){
+    _deliveryAddress = newAddress;
+    notifyListeners();
+
+
+  }
+
   String displayCartReceipt() {
     final receipt = StringBuffer();
     receipt.writeln("Here's your receipt");
@@ -142,6 +154,9 @@ class Restraunt extends ChangeNotifier {
     receipt.writeln();
     receipt.writeln("Total Items: ${getTotalItemCount()}");
     receipt.writeln("Total Price: ${_formatPrice(getTotalPrice())}");
+    receipt.writeln();
+    receipt.writeln('Delivering to: $deliveryAddress');
+
 
     return receipt.toString();
   }

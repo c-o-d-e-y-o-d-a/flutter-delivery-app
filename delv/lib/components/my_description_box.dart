@@ -34,19 +34,21 @@ class MyDescriptionBox  extends StatelessWidget {
                 style: myPrimaryTextStyle),
               Text(
                 "Delivery fee",
-                style: mySecondaryTextStyle,)
+                style: myPrimaryTextStyle,)
             ],
           ),
 
+          SizedBox(width: 10,),
+
           Column(
-             mainAxisAlignment: MainAxisAlignment.end,
+             mainAxisAlignment: MainAxisAlignment.center,
             children: [
             Text(
               '15 - 30 min',
               style: myPrimaryTextStyle),
              Text(
-              "Delivery timne",
-              style: mySecondaryTextStyle,
+              "Delivery time",
+              style: myPrimaryTextStyle,
 
              )],
           ),

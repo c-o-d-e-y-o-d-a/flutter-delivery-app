@@ -1,8 +1,27 @@
 import 'package:delv/components/my_receipt.dart';
+import 'package:delv/database/firestore.dart';
+import 'package:delv/models/restraunts.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class DeliveryProgressPage extends StatelessWidget {
+class DeliveryProgressPage extends StatefulWidget {
   const DeliveryProgressPage({super.key});
+
+  @override
+  State<DeliveryProgressPage> createState() => _DeliveryProgressPageState();
+}
+
+class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
+
+  FirestoreService db = FirestoreService();
+
+  @override
+  void initState(){
+    super.initState();
+
+    String receipt = context.read<Restraunt>().displayCartReceipt();
+    db.savedOrderToDatabase(receipt);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +40,6 @@ class DeliveryProgressPage extends StatelessWidget {
 
     );
   }
-
 
   Widget _buildBottomNavBar(BuildContext context){
     return Container(

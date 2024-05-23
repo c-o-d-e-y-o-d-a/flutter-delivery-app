@@ -1,3 +1,4 @@
+import 'package:delv/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:delv/components/my_button.dart';
 import 'package:delv/components/my_textfield.dart';
@@ -17,7 +18,41 @@ class _LoginPageState extends State<registerPage> {
   TextEditingController confirmPasswordController = TextEditingController();
 
 
-  
+  //register method
+
+  void register() async {
+    //get auth service
+
+    final _authService = AuthService();
+    //check if password match -> create user
+
+    if(passwordController.text == confirmPasswordController.text){
+
+      try{
+       await  _authService.signInWithEmailPassword(
+        emailController.text,
+        passwordController.text);
+      }
+
+      catch(e){
+
+        showDialog(context: context,
+         builder: (context) => AlertDialog(
+          title: Text(
+            e.toString()),
+         ));
+         
+      }
+    }
+
+    else{
+      showDialog(context: context, builder: (context) => AlertDialog(
+        title: Text('The passwords don\'t match'),
+      ));
+    }
+
+
+  }
 
   @override
   Widget build(BuildContext context) {

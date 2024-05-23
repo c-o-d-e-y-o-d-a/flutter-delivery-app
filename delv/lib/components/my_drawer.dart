@@ -1,3 +1,4 @@
+import 'package:delv/services/auth/auth_service.dart';
 import 'package:delv/pages/home_page.dart';
 import 'package:delv/pages/settings_page.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,13 @@ import 'package:delv/components/my_drawer_tile.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
+
+  void logout(){
+    
+    final _authService = AuthService();
+    _authService.signOut();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +60,19 @@ class MyDrawer extends StatelessWidget {
                 text: "L O G O U T",
                 icon: Icons.logout,
                 onTap: (){
+
+                  try{
+                    logout();
+                  }
+                  catch(e){
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            title: Text(e.toString()),
+                          ));
+                  }
+
+
                   
                 }),
 

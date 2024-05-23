@@ -1,3 +1,4 @@
+import 'package:delv/services/auth/auth_service.dart';
 import 'package:delv/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:delv/components/my_button.dart';
@@ -18,14 +19,27 @@ class _LoginPageState extends State<LoginPage> {
 
 //login method
 
-void login(){
+void login() async{
 
-  /*
-  fill out authentication here...
+  final _authService = AuthService();
 
-  */
+  try{
+    await _authService.signInWithEmailPassword(
+      emailController.text,
+      passwordController.text
+      );
 
-  Navigator.push(context,MaterialPageRoute(builder:(context)=> const HomePage()));
+      
+  }
+  catch(e){
+    showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text(e.toString()),
+              ));
+  }
+  
+
 }
 
  
