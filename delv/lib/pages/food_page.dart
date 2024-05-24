@@ -4,6 +4,8 @@ import 'package:delv/components/my_button.dart';
 import 'package:delv/models/food.dart';
 import 'package:provider/provider.dart';
 
+
+
 class FoodPage extends StatefulWidget {
   final Food food;
   final Map<Addon, bool> selectAddons = {};
@@ -122,18 +124,18 @@ class _FoodPageState extends State<FoodPage> {
                 },
               ),
             ),
+            Padding(
+              padding: EdgeInsets.all(20),
+            child: MyButton(
+              text: "Add to cart",
+                onTap: () {
+            addToCart(widget.food, widget.selectAddons);
+          },
+        ),)
           ],
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: MyButton(
-          text: "Add to cart",
-          onTap: () {
-            addToCart(widget.food, widget.selectAddons);
-          },
-        ),
-      ),
+      
     );
   }
 }

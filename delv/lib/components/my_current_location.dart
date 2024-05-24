@@ -39,7 +39,9 @@ class MyCurrentLocation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
       crossAxisAlignment: CrossAxisAlignment.start, // Align items to start
       children: [
         Text(
@@ -48,7 +50,8 @@ class MyCurrentLocation extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () => openLocationSearchBox(context),
-          child: Row(
+          child: 
+          Row(
             children: [
               Expanded(
                 // Add expanded to avoid overflow
@@ -68,6 +71,7 @@ class MyCurrentLocation extends StatelessWidget {
           ),
         ),
       ],
+    ),
     );
   }
 }

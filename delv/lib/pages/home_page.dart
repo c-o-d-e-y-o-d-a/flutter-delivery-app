@@ -17,121 +17,99 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
-
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     _tabController = TabController(length: 5, vsync: this);
   }
 
-
   @override
-  void dispose(){
+  void dispose() {
     _tabController.dispose();
     super.dispose();
   }
 
-
-  List<Food> _filterMenuByCategory(FoodCategory category, List<Food> fullMenu){
+  List<Food> _filterMenuByCategory(FoodCategory category, List<Food> fullMenu) {
     return fullMenu.where((food) => food.category == category).toList();
-
   }
 
-
-  List<Widget> getFoodInThisCategory(List<Food> fullMenu){
+  List<Widget> _getFoodInThisCategory(List<Food> fullMenu) {
     return FoodCategory.values.map((category) {
-
-      List<Food> categoryMenu = _filterMenuByCategory(category,fullMenu);
+      List<Food> categoryMenu = _filterMenuByCategory(category, fullMenu);
 
       return ListView.builder(
         itemCount: categoryMenu.length,
         physics: const NeverScrollableScrollPhysics(),
         padding: EdgeInsets.zero,
-        itemBuilder: (context,index){
+        itemBuilder: (context, index) {
           final food = categoryMenu[index];
           return FoodTile(
-           food: food,
-           onTap: () => Navigator.push(context, 
-           MaterialPageRoute(
-            builder: (context) => FoodPage(food: food),
-            )));
-
+            food: food,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FoodPage(food: food),
+              ),
+            ),
+          );
         },
       );
     }).toList();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-      Scaffold(
-      
-     
-      drawer: const MyDrawer(),
-
-      body: NestedScrollView(
-        headerSliverBuilder: (context,innerBoxIsScrolled) => [
-           MySilverAppBar(
-            title: MyTabBar(tabController: _tabController),
-            child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Divider(
-                        indent:25,
-                        endIndent: 25,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-
-                      MyCurrentLocation(),
-
-
-                      MyDescriptionBox(),
-
-                    ],
-                  ),
-            
+        Scaffold(
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+          drawer: const MyDrawer(),
+          body: NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) => [
+              MySilverAppBar(
+                title: MyTabBar(tabController: _tabController),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Divider(
+                      indent: 25,
+                      endIndent: 25,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                    MyCurrentLocation(),
+                    MyDescriptionBox(),
+                  ],
+                ),
+              ),
+            ],
+            body: Consumer<Restraunt>(
+              builder: (context, restraunt, child) => TabBarView(
+                controller: _tabController,
+                children: _getFoodInThisCategory(restraunt.menu),
+              ),
             ),
-
-        ],
-
-
-        body : Consumer<Restraunt>(
-          builder: (context, restraunt, child) => TabBarView(
-          controller: _tabController,
-          children: getFoodInThisCategory(restraunt.menu),
-        
-        )
-        )
-      ),
-    ),
-
-    
-    SafeArea(
-      child:Opacity(opacity: 0.6,
-      child:Container(
-          decoration:BoxDecoration(
-            color:Theme.of(context).colorScheme.secondary,
-           shape: BoxShape.circle,
-          ),
-          child: IconButton(
-            icon:Icon(Icons.arrow_back_ios_rounded),
-            onPressed: () => Navigator.pop(context),
           ),
         ),
-        ), ),
-        
-      ]
-    
+        SafeArea(
+          child: Opacity(
+            opacity: 0.6,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.secondary,
+                shape: BoxShape.circle,
+              ),
+              child: IconButton(
+                icon: Icon(Icons.arrow_back_ios_rounded),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
-
-
-    
-    
   }
 }

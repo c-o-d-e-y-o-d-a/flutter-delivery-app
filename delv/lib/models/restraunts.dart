@@ -4,12 +4,9 @@ import 'package:delv/models/food.dart';
 import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
 
-
 class Restraunt extends ChangeNotifier {
-
   String _deliveryAddress = '99 Hollywood Blv';
   String get deliveryAddress => _deliveryAddress;
-
 
   final List<Food> _menu = [
     // burgers
@@ -17,7 +14,7 @@ class Restraunt extends ChangeNotifier {
       name: "Classic CheeseBurger",
       description:
           "A juicy patty with melted cheddar, lettuce, tomato, and a hint of onion and pickle.",
-      imagePath: "",
+      imagePath: "lib/images/burgers/burger.png",
       price: 0.99,
       category: FoodCategory.burgers,
       availableAddons: [
@@ -29,7 +26,7 @@ class Restraunt extends ChangeNotifier {
       name: "BBQ Bacon Burger",
       description:
           "Smoky BBQ sauce, crispy bacon, and onion rings make this burger a savory delight.",
-      imagePath: "path",
+      imagePath: "lib/images/burgers/burger.png",
       price: 10.99,
       category: FoodCategory.burgers,
       availableAddons: [
@@ -41,7 +38,7 @@ class Restraunt extends ChangeNotifier {
       name: "Vegan Burger",
       description:
           "Smoky BBQ sauce, crispy tofu, and onion rings make this vegan burger a savory delight.",
-      imagePath: "path",
+      imagePath: "lib/images/burgers/burger.png",
       price: 7,
       category: FoodCategory.burgers,
       availableAddons: [
@@ -50,7 +47,142 @@ class Restraunt extends ChangeNotifier {
         Addon(name: "Extra cheese", price: 0.99),
       ],
     ),
-    // Add more food items here...
+
+    Food(
+      name: "Paneer Burger",
+      description:
+          "Smoky BBQ sauce, crispy Paneer patty, and onions make this vegan burger a savory delight.",
+      imagePath: "lib/images/burgers/burger.png",
+      price: 7,
+      category: FoodCategory.burgers,
+      availableAddons: [
+        Addon(name: "Extra `cheese`", price: 0.99),
+        Addon(name: "Lettuce", price: 0.99),
+        Addon(name: "Peri Peri sauce", price: 0.99),
+      ],
+    ),
+
+    //sweets
+
+    Food(
+      name: "Gulab Jamun",
+      description:
+          "A sweet Indian dessert made from milk solids and sugar, often garnished with nuts.",
+      imagePath: "lib/images/desserts/gulabjamun.png",
+      price: 2,
+      category: FoodCategory.desserts,
+      availableAddons: [],
+    ),
+
+    Food(
+      name: "Kaju Katli",
+      description:
+          "A traditional Indian dessert made with cashew nuts, sugar, and ghee butter.",
+      imagePath: "lib/images/desserts/kajukatli.png",
+      price: 2,
+      category: FoodCategory.desserts,
+      availableAddons: [],
+    ),
+
+    Food(
+      name: "Ras Malai",
+      description:
+          "An Indian dessert of cottage cheese balls soaked in clotted cream, served cold.",
+      imagePath: "lib/images/desserts/rasmalai.png",
+      price: 2,
+      category: FoodCategory.desserts,
+      availableAddons: [],
+    ),
+
+
+    //drinks
+
+    Food(
+      name: "Amul Lassi ",
+      description:
+          "A refreshing, protein-rich Indian drink with various flavors like Rose and Mango.",
+      imagePath: "lib/images/drinks/amulLassi.png",
+      price: 2,
+      category: FoodCategory.drinks,
+      availableAddons: [],
+    ),
+
+    Food(
+      name: "Coca cola ",
+      description:
+          " A globally popular carbonated soft drink with a distinct cola flavor.",
+      imagePath: "lib/images/drinks/cocaCola.png",
+      price: 2,
+      category: FoodCategory.drinks,
+      availableAddons: [],
+    ),
+
+    Food(
+      name: "Thumbs up ",
+      description:
+          " An Indian cola brand known for its strong, fizzy taste and charismatic appeal.",
+      imagePath: "lib/images/drinks/thumbsup.png",
+      price: 2,
+      category: FoodCategory.drinks,
+      availableAddons: [],
+    ),
+
+    //salads
+
+    Food(
+      name: "Ceasers Salad",
+      description:
+          "A classic salad with romaine lettuce, croutons, and a tangy dressing.",
+      imagePath: "lib/images/salads/ceasersSalad.png",
+      price: 8,
+      category: FoodCategory.salads,
+      availableAddons: [
+        Addon(name: "Cream cheese", price: 0.99),
+        Addon(name: "Extra olive oil", price: 0.99),
+      ],
+    ),
+
+     Food(
+      name: "Paneer Salad",
+      description:
+          "A flavorful Indian salad with pan-fried paneer and vegetables in a lemon-honey-ginger dressing",
+      imagePath: "lib/images/salads/paneerSalad.png",
+      price: 8,
+      category: FoodCategory.salads,
+      availableAddons: [
+        Addon(name: "Cream cheese", price: 0.99),
+        Addon(name: "Extra olive oil", price: 0.99),
+      ],
+    ),
+
+    //sides
+
+    
+    Food(
+      name: "Crispy Fries ",
+      description:
+          "Crispy Hand cut well seasones potatoe fries ",
+      imagePath: "lib/images/sides/fries.png",
+      price: 8,
+      category: FoodCategory.sides,
+      availableAddons: [
+        Addon(name: "Cream cheese", price: 0.99),
+        Addon(name: "Special spice mix", price: 0.99),
+      ],
+    ),
+
+    
+    Food(
+      name: "Peri peri sauce",
+      description:
+          "Peri peri sauce",
+      imagePath: "lib/images/sides/periPeriDip.png",
+      price: 8,
+      category: FoodCategory.sides,
+      availableAddons: [
+        
+      ],
+    ),
   ];
 
   List<Food> get menu => _menu;
@@ -120,11 +252,9 @@ class Restraunt extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateDeliveryAddress(String newAddress){
+  void updateDeliveryAddress(String newAddress) {
     _deliveryAddress = newAddress;
     notifyListeners();
-
-
   }
 
   String displayCartReceipt() {
@@ -157,7 +287,6 @@ class Restraunt extends ChangeNotifier {
     receipt.writeln();
     receipt.writeln('Delivering to: $deliveryAddress');
 
-
     return receipt.toString();
   }
 
@@ -171,4 +300,3 @@ class Restraunt extends ChangeNotifier {
         .join(", ");
   }
 }
-

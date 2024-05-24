@@ -25,6 +25,7 @@ class MyDescriptionBox  extends StatelessWidget {
       margin: const EdgeInsets.all(25),
 
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -38,7 +39,6 @@ class MyDescriptionBox  extends StatelessWidget {
             ],
           ),
 
-          SizedBox(width: 10,),
 
           Column(
              mainAxisAlignment: MainAxisAlignment.center,
