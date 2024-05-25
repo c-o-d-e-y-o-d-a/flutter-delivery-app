@@ -54,9 +54,9 @@ class QuantitySelector extends StatelessWidget {
           
 
           GestureDetector(
-            onTap: onDecrement,
+            onTap: onIncrement,
             child: Icon(
-              Icons.remove,
+              Icons.add,
               size: 20,
               color: Theme.of(context).colorScheme.primary,
             ),

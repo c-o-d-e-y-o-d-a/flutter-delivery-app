@@ -15,7 +15,15 @@ class MyTabBar extends StatelessWidget {
     return FoodCategory.values.map((category){
 
       return Tab(
-        text: category.toString().split('.').last,
+        child: Text(
+        category.toString().split('.').last,
+        style: TextStyle(
+          fontSize: 14.0,
+          fontWeight: FontWeight.bold,
+          ),
+         // Change the fontSize to your desired size
+  ),
+        
       );
 
     }).toList();

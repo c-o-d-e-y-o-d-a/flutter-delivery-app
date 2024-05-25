@@ -73,13 +73,9 @@ class _HomePageState extends State<HomePage>
               MySilverAppBar(
                 title: MyTabBar(tabController: _tabController),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Divider(
-                      indent: 25,
-                      endIndent: 25,
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
+                   
                     MyCurrentLocation(),
                     MyDescriptionBox(),
                   ],
@@ -94,22 +90,25 @@ class _HomePageState extends State<HomePage>
             ),
           ),
         ),
-        SafeArea(
-          child: Opacity(
-            opacity: 0.6,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.secondary,
-                shape: BoxShape.circle,
-              ),
-              child: IconButton(
-                icon: Icon(Icons.arrow_back_ios_rounded),
-                onPressed: () => Navigator.pop(context),
-              ),
-            ),
-          ),
-        ),
+        
       ],
     );
   }
 }
+
+
+// SafeArea(
+//           child: Opacity(
+//             opacity: 0.6,
+//             child: Container(
+//               decoration: BoxDecoration(
+//                 color: Theme.of(context).colorScheme.secondary,
+//                 shape: BoxShape.circle,
+//               ),
+//               child: IconButton(
+//                 icon: Icon(Icons.arrow_back_ios_rounded),
+//                 onPressed: () => Navigator.pop(context),
+//               ),
+//             ),
+//           ),
+//         ),

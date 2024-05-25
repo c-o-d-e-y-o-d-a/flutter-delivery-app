@@ -11,8 +11,6 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends State<PaymentPage> {
-
-
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String cardNumber = '';
   String expiryDate = '';
@@ -20,42 +18,41 @@ class _PaymentPageState extends State<PaymentPage> {
   String cvvCode = '';
   bool isCvvFocused = false;
 
-
-  void userTappedPay(BuildContext){
-    if(formKey.currentState!.validate()){
+  void userTappedPay(BuildContext context) {
+    if (formKey.currentState!.validate()) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
           title: const Text("Confirm payment"),
           content: SingleChildScrollView(
-            child: ListBody(children: [
-              Text("Card Number: $cardNumber" ),
-              Text("Expiry Date: $expiryDate"),
-              Text("Card Holder name: $cardHolderName" ),
-              Text("CVV: $cvvCode"),
-            ],
-            )
+            child: ListBody(
+              children: [
+                Text("Card Number: $cardNumber"),
+                Text("Expiry Date: $expiryDate"),
+                Text("Card Holder name: $cardHolderName"),
+                Text("CVV: $cvvCode"),
+              ],
+            ),
           ),
-          actions:[
-            TextButton(onPressed: () => Navigator.pop(context), 
-            child: const Text("Cancel")),
-            
+          actions: [
             TextButton(
-              onPressed: () => Navigator.push(context,MaterialPageRoute(
-                builder: (context) => DeliveryProgressPage(),
+              onPressed: () => Navigator.pop(context),
+              child: const Text("Cancel"),
             ),
-            ) ,
-            child: const Text("Yes") ,
-            
+            TextButton(
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DeliveryProgressPage(),
+                ),
+              ),
+              child: const Text("Yes"),
             ),
-
-          ]
+          ],
         ),
-        );
+      );
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -66,49 +63,47 @@ class _PaymentPageState extends State<PaymentPage> {
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Checkout"),
       ),
-
-      body:Column(
-        children: [
-
-          CreditCardWidget(
-            cardNumber: cardNumber,
-            
-            expiryDate: expiryDate,
-            cardHolderName: cardHolderName,
-            cvvCode: cvvCode,
-            showBackView: isCvvFocused,
-            onCreditCardWidgetChange: (p0){},
-            ),
-
-            CreditCardForm(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            CreditCardWidget(
               cardNumber: cardNumber,
               expiryDate: expiryDate,
               cardHolderName: cardHolderName,
               cvvCode: cvvCode,
-              onCreditCardModelChange: (data) {
-                setState(() {
-                  cardNumber = data.cardNumber;
-                  expiryDate = data.expiryDate;
-                  cardHolderName = data.cardHolderName;
-                  cvvCode = data.cvvCode;
-                });
+              showBackView: isCvvFocused,
+              onCreditCardWidgetChange: (p0) {},
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: CreditCardForm(
+                cardNumber: cardNumber,
+                expiryDate: expiryDate,
+                cardHolderName: cardHolderName,
+                cvvCode: cvvCode,
+                onCreditCardModelChange: (data) {
+                  setState(() {
+                    cardNumber = data.cardNumber;
+                    expiryDate = data.expiryDate;
+                    cardHolderName = data.cardHolderName;
+                    cvvCode = data.cvvCode;
+                  });
+                },
+                formKey: formKey,
+              ),
+            ),
+
+            const SizedBox(height: 25,),
+            MyButton(
+              onTap: () {
+                userTappedPay(context);
               },
-              formKey: formKey,
-              ),
-
-              const Spacer(),
-
-              MyButton(
-                onTap: (){userTappedPay(context);},
-                text:"Pay now",
-              ),
-
-              const SizedBox(height: 25,),
-
-
-              
-
-      ],)
+              text: "Pay now",
+            ),
+            const SizedBox(height: 25),
+          ],
+        ),
+      ),
     );
   }
 }

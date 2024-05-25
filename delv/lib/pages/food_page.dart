@@ -4,40 +4,43 @@ import 'package:delv/components/my_button.dart';
 import 'package:delv/models/food.dart';
 import 'package:provider/provider.dart';
 
-
-
 class FoodPage extends StatefulWidget {
   final Food food;
-  final Map<Addon, bool> selectAddons = {};
 
   // Constructor with required Food parameter
   FoodPage({
     Key? key,
     required this.food,
-  }) : super(key: key) {
-    for (Addon addon in food.availableAddons) {
-      selectAddons[addon] = false;
-    }
-  }
+  }) : super(key: key);
 
   @override
   State<FoodPage> createState() => _FoodPageState();
 }
 
 class _FoodPageState extends State<FoodPage> {
-  void addToCart(Food food, Map<Addon, bool> selectedAddons) {
-    // Close the current food page to go back to the menu
-    Navigator.pop(context);
+  late Map<Addon, bool> selectAddons;
 
+  @override
+  void initState() {
+    super.initState();
+    selectAddons = {
+      for (Addon addon in widget.food.availableAddons) addon: false
+    };
+  }
+
+  void addToCart(Food food) {
     // Format the selected addons
     List<Addon> currentlySelectedAddons = [];
     for (Addon addon in widget.food.availableAddons) {
-      if (widget.selectAddons[addon] == true) {
+      if (selectAddons[addon] == true) {
         currentlySelectedAddons.add(addon);
       }
     }
 
     context.read<Restraunt>().addToCart(food, currentlySelectedAddons);
+
+    // Close the current food page to go back to the menu
+    Navigator.pop(context);
   }
 
   @override
@@ -107,17 +110,22 @@ class _FoodPageState extends State<FoodPage> {
                 itemBuilder: (context, index) {
                   Addon addon = widget.food.availableAddons[index];
                   return CheckboxListTile(
-                    title: Text(addon.name),
+                    title: Text(
+                    addon.name,
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
                     subtitle: Text(
                       '\$${addon.price.toString()}',
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
-                    value: widget.selectAddons[addon],
+                    value: selectAddons[addon],
                     onChanged: (bool? value) {
                       setState(() {
-                        widget.selectAddons[addon] = value!;
+                        selectAddons[addon] = value!;
                       });
                     },
                   );
@@ -126,16 +134,16 @@ class _FoodPageState extends State<FoodPage> {
             ),
             Padding(
               padding: EdgeInsets.all(20),
-            child: MyButton(
-              text: "Add to cart",
+              child: MyButton(
+                text: "Add to cart",
                 onTap: () {
-            addToCart(widget.food, widget.selectAddons);
-          },
-        ),)
+                  addToCart(widget.food);
+                },
+              ),
+            ),
           ],
         ),
       ),
-      
     );
   }
 }

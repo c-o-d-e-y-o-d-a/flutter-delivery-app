@@ -1,6 +1,8 @@
+import 'package:delv/components/my_button.dart';
 import 'package:delv/components/my_cart_tile.dart';
 import 'package:delv/models/cart_item.dart';
 import 'package:delv/models/restraunts.dart';
+import 'package:delv/pages/payment_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -57,7 +59,7 @@ class CartPage extends StatelessWidget {
           body: Column(
             children: [
               userCart.isEmpty
-              ? const Text("Cart is Empty"):
+              ? Expanded(child: Center(child: Text("Cart is Empty"))):
               
               Expanded(
                 child: ListView.builder(
@@ -71,7 +73,15 @@ class CartPage extends StatelessWidget {
 
                 },
                 ),
-              )
+              ),
+
+              MyButton(text: "Go to Checkout", onTap: (){
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const PaymentPage()));
+
+              }),
+
+              const SizedBox(height: 25,),
                 
               
             ],

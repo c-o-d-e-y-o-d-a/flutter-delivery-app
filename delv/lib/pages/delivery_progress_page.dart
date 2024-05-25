@@ -33,17 +33,19 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
       ),
 
       bottomNavigationBar: _buildBottomNavBar(context),
-      body: const Column(children: [
+      body: SingleChildScrollView(
+        child: const Column(children: [
         MyReciept(),
       ],
       ),
+      )
 
     );
   }
 
   Widget _buildBottomNavBar(BuildContext context){
     return Container(
-      height: 100,
+      height: 103,
       decoration:BoxDecoration(
         color: Theme.of(context).colorScheme.secondary,
         borderRadius: const BorderRadius.only(

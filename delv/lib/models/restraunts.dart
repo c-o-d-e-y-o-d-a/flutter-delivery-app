@@ -94,7 +94,6 @@ class Restraunt extends ChangeNotifier {
       availableAddons: [],
     ),
 
-
     //drinks
 
     Food(
@@ -142,7 +141,7 @@ class Restraunt extends ChangeNotifier {
       ],
     ),
 
-     Food(
+    Food(
       name: "Paneer Salad",
       description:
           "A flavorful Indian salad with pan-fried paneer and vegetables in a lemon-honey-ginger dressing",
@@ -157,11 +156,9 @@ class Restraunt extends ChangeNotifier {
 
     //sides
 
-    
     Food(
       name: "Crispy Fries ",
-      description:
-          "Crispy Hand cut well seasones potatoe fries ",
+      description: "Crispy Hand cut well seasones potatoe fries ",
       imagePath: "lib/images/sides/fries.png",
       price: 8,
       category: FoodCategory.sides,
@@ -171,19 +168,17 @@ class Restraunt extends ChangeNotifier {
       ],
     ),
 
-    
     Food(
       name: "Peri peri sauce",
-      description:
-          "Peri peri sauce",
+      description: "Peri peri sauce",
       imagePath: "lib/images/sides/periPeriDip.png",
       price: 8,
       category: FoodCategory.sides,
-      availableAddons: [
-        
-      ],
+      availableAddons: [],
     ),
   ];
+
+  //getters
 
   List<Food> get menu => _menu;
 
@@ -191,20 +186,25 @@ class Restraunt extends ChangeNotifier {
 
   List<CartItem> get cart => _cart;
 
+  //O P E R A T I O N S
+
   void addToCart(Food food, List<Addon> selectedAddons) {
-    final cartItem = _cart.firstWhere(
+    // Check if the cart already contains this food item with the same add-ons
+    final existingCartItemIndex = _cart.indexWhere(
       (item) =>
           item.food == food &&
           ListEquality().equals(item.selectedAddons, selectedAddons),
-      orElse: () => CartItem(food: food, selectedAddons: selectedAddons),
     );
 
-    if (cartItem != null) {
-      cartItem.quantity++;
+    if (existingCartItemIndex != -1) {
+      // If it exists, increment the quantity
+      _cart[existingCartItemIndex].quantity++;
     } else {
+      // If it does not exist, add a new item to the cart
       _cart.add(CartItem(food: food, selectedAddons: selectedAddons));
     }
 
+    // Notify listeners about the change
     notifyListeners();
   }
 
