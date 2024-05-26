@@ -47,6 +47,8 @@ class QuantitySelector extends StatelessWidget {
               child: Center(
                 child: Text(
                   quantity.toString(),
+                  style: TextStyle(color:  Theme.of(context).colorScheme.primary,
+                  ),
                   )),
             )
           

@@ -28,7 +28,10 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
     return Scaffold(
      
       appBar: AppBar(
-        title: Text("Delivery in progress.."),
+        title: Text("Delivery in progress..",
+        style: TextStyle(
+                color: Theme.of(context).colorScheme.inversePrimary,
+              )),
         backgroundColor: Colors.transparent,
       ),
 
@@ -56,7 +59,8 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
 
       padding: const EdgeInsets.all(25),
 
-      child: Row(children: [
+      child: Row(
+        children: [
         Container(
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.background,

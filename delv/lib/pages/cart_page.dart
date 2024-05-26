@@ -27,7 +27,12 @@ class CartPage extends StatelessWidget {
                   showDialog(
                    context: context,
                    builder: (context) => AlertDialog(
-                    title: Text("Are you sure you want to clear cart?"),
+                    title: Text("Are you sure you want to clear cart?",
+                                      style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .inversePrimary,
+                                      )),
 
                     actions: [
                       TextButton(

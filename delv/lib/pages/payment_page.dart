@@ -23,16 +23,39 @@ class _PaymentPageState extends State<PaymentPage> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text("Confirm payment"),
+          
+          title:  Text("Confirm payment",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.inversePrimary,
+              )),
           content: SingleChildScrollView(
-            child: ListBody(
+            child: Container(
+              
+              child: ListBody(
               children: [
-                Text("Card Number: $cardNumber"),
-                Text("Expiry Date: $expiryDate"),
-                Text("Card Holder name: $cardHolderName"),
-                Text("CVV: $cvvCode"),
+                Text("Card Number: $cardNumber",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
+                ),
+                Text("Expiry Date: $expiryDate",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                ),
+                Text("Card Holder name: $cardHolderName",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                ),
+                Text("CVV: $cvvCode",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                ),
               ],
             ),
+            )
           ),
           actions: [
             TextButton(
@@ -64,19 +87,24 @@ class _PaymentPageState extends State<PaymentPage> {
         title: const Text("Checkout"),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            CreditCardWidget(
-              cardNumber: cardNumber,
-              expiryDate: expiryDate,
-              cardHolderName: cardHolderName,
-              cvvCode: cvvCode,
-              showBackView: isCvvFocused,
-              onCreditCardWidgetChange: (p0) {},
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: CreditCardForm(
+        child: Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary,
+            
+          ),
+          child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              CreditCardWidget(
+                cardNumber: cardNumber,
+                expiryDate: expiryDate,
+                cardHolderName: cardHolderName,
+                cvvCode: cvvCode,
+                showBackView: isCvvFocused,
+                onCreditCardWidgetChange: (p0) {},
+              ),
+              CreditCardForm(
                 cardNumber: cardNumber,
                 expiryDate: expiryDate,
                 cardHolderName: cardHolderName,
@@ -91,18 +119,18 @@ class _PaymentPageState extends State<PaymentPage> {
                 },
                 formKey: formKey,
               ),
-            ),
-
-            const SizedBox(height: 25,),
-            MyButton(
-              onTap: () {
-                userTappedPay(context);
-              },
-              text: "Pay now",
-            ),
-            const SizedBox(height: 25),
-          ],
+              const SizedBox(height: 25),
+              MyButton(
+                onTap: () {
+                  userTappedPay(context);
+                },
+                text: "Pay now",
+              ),
+              const SizedBox(height: 25),
+            ],
+          ),
         ),
+        )
       ),
     );
   }

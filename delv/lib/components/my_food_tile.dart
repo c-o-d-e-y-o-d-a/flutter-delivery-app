@@ -27,9 +27,10 @@ class FoodTile extends StatelessWidget {
                     children: [
                       Text(
                         food.name,
-                        style: const TextStyle(
+                        style:  TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
+                          color:  Theme.of(context).colorScheme.primary,
                         ),
                         overflow: TextOverflow.ellipsis, // Handle overflow
                         maxLines: 1,

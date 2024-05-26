@@ -14,7 +14,10 @@ class MyReciept extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
 
           children: [
-          Text("Thankyou for your order!"),
+          Text("Thankyou for your order!",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                )),
           const SizedBox(height: 25),
           Container(
             decoration : BoxDecoration(
@@ -22,11 +25,18 @@ class MyReciept extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             padding: const EdgeInsets.all(25),
-            child: Consumer<Restraunt>(builder: (context,restraunt,child) => Text(restraunt.displayCartReceipt()),
+            child: Consumer<Restraunt>(builder: (context,restraunt,child) =>
+             Text(restraunt.displayCartReceipt(),
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        )),
             ),
           ),
-          const SizedBox(height: 25),
-          const Text("Estimated delivery time is: 4:10 PM"),
+           const SizedBox(height: 25),
+           Text("Estimated delivery time is: 4:10 PM",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                )),
 
         ],
         ),
