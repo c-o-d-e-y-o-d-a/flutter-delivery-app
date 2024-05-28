@@ -11,21 +11,20 @@ class MyTabBar extends StatelessWidget {
 
   });
 
-  List<Tab> _buildCategoryTabs(){
-    return FoodCategory.values.map((category){
-
+  List<Tab> _buildCategoryTabs() {
+    return FoodCategory.values.map((category) {
       return Tab(
-        child: Text(
-        category.toString().split('.').last,
-        style: TextStyle(
-          fontSize: 14.0,
-          fontWeight: FontWeight.bold,
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            category.toString().split('.').last,
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-         // Change the fontSize to your desired size
-  ),
-        
+        ),
       );
-
     }).toList();
   }
 
